@@ -1,0 +1,15 @@
+{
+  "name": "standard",
+  "version": "1.0.0",
+  "description": "for improve the knowledge",
+  "license": "ISC",
+  "author": "praveenbackendDev",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

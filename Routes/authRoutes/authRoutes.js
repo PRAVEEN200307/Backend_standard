@@ -10,7 +10,7 @@ router.get('/:id', getAllAdmin);
 
 router.post('/',upload.fields([{name:'image', maxCount:1},{name:'document',maxCount:1}]) ,createNewAdmin);
 
-router.put('/', updateAdmin)
+router.put('/:id', updateAdmin)
 
 
 export default router

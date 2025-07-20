@@ -18,14 +18,12 @@ export const getAllAdmin = async (req, res) => {
     // Fetch all admins
     const admins = await Auth.find();
     return res.status(200).json(admins);
-    
+
   } catch (err) {
     console.error("Error in getAllAdmin:", err);
     return res.status(500).json({ msg: err.message });
   }
 };
-
-
 
 export const createNewAdmin = async (req, res) => {
   try {
@@ -57,7 +55,35 @@ export const createNewAdmin = async (req, res) => {
   }
 };
 
-export const updateAdmin = (req, res) => {
-  
-  res.send("update new Admin")
+export const updateAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let updatedAdmin = await Auth.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedAdmin) {
+      return res.status(404).json({
+        message: 'Admin not found',
+        status: false
+      });
+    }
+
+    res.status(200).json({
+      message: 'Admin Updated Successfully',
+      updatedAdmin,
+      status: true
+    });
+
+  } catch (err) {
+    console.error("Update Admin Error:", err);
+    res.status(500).json({
+      message: 'Failed to Update Admin',
+      status: false,
+      error: err.message
+    });
+  }
 }

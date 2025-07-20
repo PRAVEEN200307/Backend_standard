@@ -1,8 +1,31 @@
 import Auth from "../models/authmodule.js";
 
-export const getAllAdmin = (req, res) => {
-    res.send('Get All the Admin')
+export const getAllAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // console.log(re);
+
+    if (id) {
+      // Fetch single admin by ID
+      const singleAdmin = await Auth.findById(id);
+      if (!singleAdmin) {
+        return res.status(404).json({ msg: "Admin not found" });
+      }
+      return res.status(200).json(singleAdmin);
+    }
+
+    // Fetch all admins
+    const admins = await Auth.find();
+    return res.status(200).json(admins);
+    
+  } catch (err) {
+    console.error("Error in getAllAdmin:", err);
+    return res.status(500).json({ msg: err.message });
+  }
 };
+
+
 
 export const createNewAdmin = async (req, res) => {
   try {
@@ -34,6 +57,6 @@ export const createNewAdmin = async (req, res) => {
   }
 };
 
-export const updateAdmin = (req,res)=>{
-    res.send("update new Admin")
+export const updateAdmin = (req, res) => {
+  res.send("update new Admin")
 }

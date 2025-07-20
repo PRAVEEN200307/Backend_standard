@@ -5,6 +5,8 @@ import { upload } from "../../middleware/uploadMiddleware.js";
 const router = express.Router();
 
 router.get('/', getAllAdmin);
+router.get('/:id', getAllAdmin);
+
 
 router.post('/',upload.fields([{name:'image', maxCount:1},{name:'document',maxCount:1}]) ,createNewAdmin);
 

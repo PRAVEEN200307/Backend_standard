@@ -1,11 +1,12 @@
 import express from "express";
 import { createNewAdmin, getAllAdmin, updateAdmin } from "../../Controllers/authController.js";
+import { upload } from "../../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 
 router.get('/', getAllAdmin);
 
-router.post('/', createNewAdmin);
+router.post('/',upload.fields([{name:'image', maxCount:1},{name:'document',maxCount:1}]) ,createNewAdmin);
 
 router.put('/', updateAdmin)
 

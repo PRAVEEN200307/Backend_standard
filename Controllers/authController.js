@@ -58,5 +58,6 @@ export const createNewAdmin = async (req, res) => {
 };
 
 export const updateAdmin = (req, res) => {
+  
   res.send("update new Admin")
 }

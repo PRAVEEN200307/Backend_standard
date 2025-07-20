@@ -87,3 +87,24 @@ export const updateAdmin = async (req, res) => {
     });
   }
 }
+
+
+export const deleteAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedAdmin = await Auth.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: 'Admin Deleted Successfully',
+      deletedAdmin,
+      status: true
+    })
+  }
+  catch (err) {
+    res.status(500).json({
+      message: 'Failed to Delete Admin',
+      status: false,
+      error: err.message
+    })
+  }
+}
